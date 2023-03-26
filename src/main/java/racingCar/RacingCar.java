@@ -1,10 +1,13 @@
 package racingCar;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class RacingCar {
     private ArrayList<Car> cars = new ArrayList<Car>();
+    private ArrayList<RacingMember> results = new ArrayList<RacingMember>();
     private int trial = 0;
     private int maxPosition = 0;
 
@@ -18,6 +21,12 @@ public class RacingCar {
         }
     }
 
+    public ArrayList<RacingMember> putCas(){
+        for (Car car : cars) {
+            results.add(car.getMyNamePosition());
+        }
+        return results;
+    };
     public void setTrial(int trial) {
         this.trial = trial;
     }
@@ -30,6 +39,7 @@ public class RacingCar {
             System.out.println("");
         }
         setWinner();
+
     }
 
     private void racingCar() {
@@ -61,7 +71,6 @@ public class RacingCar {
         }
         winners.append(", "+name);
     }
-
     public void showWinner() {
         System.out.print("최종 우승자: "+winners+"\n");
     }

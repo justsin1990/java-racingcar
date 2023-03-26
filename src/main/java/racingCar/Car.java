@@ -8,15 +8,24 @@ import static racingCar.RacingCarConfiguration.LIMIT_RANDOM_VALUE;
 public class Car {
     private String name;
     private StringBuilder position = new StringBuilder();
+    private int positionNumber;
     private Random random = new Random();
 
     public Car (String name) {
         this.name = name;
+        this.positionNumber = 0;
     }
 
     public void step() {
         if(random.nextInt(MAX_RANDOM_VALUE.getValue()) >= LIMIT_RANDOM_VALUE.getValue())
+        {
+            positionNumber++;
             position.append("-");
+        }
+    }
+    public RacingMember getMyNamePosition()
+    {
+        return new RacingMember(name, positionNumber);
     }
 
     public void printPosition() {

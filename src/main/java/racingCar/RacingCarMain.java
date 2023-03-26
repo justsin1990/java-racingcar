@@ -1,19 +1,33 @@
 package racingCar;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.fasterxml.jackson.annotation.JacksonAnnotation;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
+
+
+@SpringBootApplication
+@RestController
 public class RacingCarMain {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
-        String inputString = in.nextLine();
+        SpringApplication.run(RacingCarMain.class, args);
 
-        System.out.println("시도할 횟수는 몇 회인가요?");
-        int trial = Integer.parseInt(in.nextLine());
+    }
 
-        RacingCar racingCar = new RacingCar(inputString);
-        racingCar.setTrial(trial);
+    @PostMapping("/racingcar")
+    public ArrayList<RacingMember> racing(@RequestBody RacingMember RacingMember) {
+        RacingCar racingCar = new RacingCar(RacingMember.name);
+        racingCar.setTrial(RacingMember.count);
         racingCar.run();
         racingCar.showWinner();
+        return racingCar.putCas();
+    }
+    @RequestMapping("/")
+    String home() {
+        return "Hello World!";
     }
 }
+

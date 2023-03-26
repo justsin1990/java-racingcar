@@ -13,4 +13,6 @@ public enum RacingCarConfiguration {
     public int getValue() {
         return this.value;
     }
+
+
 }
